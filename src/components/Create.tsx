@@ -1,13 +1,14 @@
 import * as React from 'react';
+import PageWrapper from './PageWrapper';
 
 export interface Props {
 }
 
 function Create({}: Props) {
   return (
-    <div>
+    <PageWrapper>
       <h1>Create Page</h1>
-    </div>
+    </PageWrapper>
   );
 }
 

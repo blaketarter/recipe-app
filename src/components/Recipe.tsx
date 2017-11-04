@@ -1,13 +1,15 @@
 import * as React from 'react';
+import PageWrapper from './PageWrapper';
 
 export interface Props {
+  match?: any;
 }
 
-function Recipe({}: Props) {
+function Recipe({ match }: Props) {
   return (
-    <div>
-      <h1>Recipe Page</h1>
-    </div>
+    <PageWrapper>
+      <h1>Recipe Page {match && match.params && match.params.id ? match.params.id : ''}</h1>
+    </PageWrapper>
   );
 }
 

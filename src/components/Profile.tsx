@@ -1,13 +1,14 @@
 import * as React from 'react';
+import PageWrapper from './PageWrapper';
 
 export interface Props {
 }
 
 function Profile({}: Props) {
   return (
-    <div>
+    <PageWrapper>
       <h1>Profile Page</h1>
-    </div>
+    </PageWrapper>
   );
 }
 

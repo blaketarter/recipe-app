@@ -1,13 +1,14 @@
 import * as React from 'react';
+import PageWrapper from './PageWrapper';
 
 export interface Props {
 }
 
 function Tags({}: Props) {
   return (
-    <div>
+    <PageWrapper>
       <h1>Tags Page</h1>
-    </div>
+    </PageWrapper>
   );
 }
 

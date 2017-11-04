@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import {
   BrowserRouter as Router,
   Route,
-  Link
 } from 'react-router-dom';
 import COLOR from '../utils/colors';
 import Home from './Home';
@@ -12,6 +11,7 @@ import Tags from './Tags';
 import Profile from './Profile';
 import Create from './Create';
 import Recipe from './Recipe';
+import Navbar from './Navbar';
 
 const Wrapper = styled.div`
   overflow: hidden;
@@ -19,6 +19,8 @@ const Wrapper = styled.div`
   color: ${COLOR.BLACK};
   height: 100vh;
   width: 100vw;
+  display: flex;
+  flex-direction: column;
 `;
 
 class App extends React.Component {
@@ -26,19 +28,14 @@ class App extends React.Component {
     return (
       <Router>
         <Wrapper>
-          <Link to="/">Home</Link>
-          <Link to="search">Search</Link>
-          <Link to="tags">Tags</Link>
-          <Link to="profile">Profile</Link>
-          <Link to="create">Create</Link>
-          <Link to="recipe">Recipe</Link>
-
           <Route exact={true} path="/" component={Home} />
           <Route path="/search" component={Search} />
           <Route path="/tags" component={Tags} />
           <Route path="/profile" component={Profile} />
           <Route path="/create" component={Create} />
-          <Route path="/recipe" component={Recipe} />
+          <Route path="/recipe/:id" component={Recipe} />
+
+          <Navbar />
         </Wrapper>
       </Router>
     );
