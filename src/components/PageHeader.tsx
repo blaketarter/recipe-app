@@ -8,7 +8,7 @@ export interface Props {
 
 const Wrapper = styled.div`
   display: block;
-  flex: 1 0 auto;
+  flex: 0 0 auto;
   background: ${COLOR.PRIMARY};
   padding: 0 25px;
   width: 100%;

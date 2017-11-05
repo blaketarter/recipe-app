@@ -6,8 +6,10 @@
     "normalize.css": "^7.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-scripts-ts": "2.8.0",
+    "redux": "^3.7.2",
     "styled-components": "^2.2.3"
   },
   "scripts": {
@@ -21,6 +23,7 @@
     "@types/node": "^8.0.47",
     "@types/react": "^16.0.20",
     "@types/react-dom": "^16.0.2",
+    "@types/react-redux": "^5.0.12",
     "@types/react-router-dom": "^4.2.0"
   }
 }

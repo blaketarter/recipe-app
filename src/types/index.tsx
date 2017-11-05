@@ -6,3 +6,7 @@ export interface Recipe {
   color: string,
   ingredients: string[],
 };
+
+export interface StoreState {
+  recipes: Recipe[],
+}
