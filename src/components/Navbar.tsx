@@ -1,16 +1,18 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import COLOR from '../utils/colors';
 
 const Wrapper = styled.ul`
-  background: ${COLOR.BLACK};
+  background: ${COLOR.WHITE};
   height: 60px;
   margin: 0;
   padding: 0;
   display: flex;
   position: relative;
-  padding-right: 65px;
+  padding-right: 20%;
+  box-shadow: 0 0px 5px rgba(0, 0, 0, 0.5);
+  flex: 0 0 auto;
 `;
 
 const NavItemWrapper = styled.li`
@@ -18,7 +20,9 @@ const NavItemWrapper = styled.li`
   margin: 0;
   padding: 0;
   flex: 1 1 auto;
-  color: ${COLOR.WHITE};
+  color: ${COLOR.BLACK};
+  font-size: 12px;
+  width: 20%;
 `;
 
 const FloatingNavItemWrapper = styled.li`
@@ -26,7 +30,7 @@ const FloatingNavItemWrapper = styled.li`
   margin: 0;
   padding: 0;
   flex: 1 1 auto;
-  background: ${COLOR.BROWN};
+  background: ${COLOR.BLUE};
   color: ${COLOR.BLACK};
   position: absolute;
   top: -32.5px;
@@ -34,9 +38,18 @@ const FloatingNavItemWrapper = styled.li`
   height: 65px;
   width: 65px;
   border-radius: 100%;
+  box-shadow: 0 0px 5px rgba(0, 0, 0, 0.5);
+  font-size: 20px;
+  overflow: hidden;
 `;
 
-const NavItem = styled(Link) `
+interface NavItemInterface {
+  activeClassName: string;
+}
+
+const activeClassName = 'nav-item-active';
+
+const NavItem = styled(NavLink).attrs<NavItemInterface>({ activeClassName })`
   height: 100%;
   width: 100%;
   text-align: center;
@@ -45,6 +58,30 @@ const NavItem = styled(Link) `
   display: flex;
   align-items: center;
   justify-content: center;
+  text-transform: uppercase;
+  font-size: inherit;
+  font-weight: bolder;
+
+  &.${activeClassName} {
+    background: ${COLOR.LIGHTGREY};
+  }
+`;
+
+const FloatingNavItem = styled(NavLink).attrs<NavItemInterface>({ activeClassName })`
+height: 100%;
+width: 100%;
+text-align: center;
+color: inherit;
+text-decoration: none;
+display: flex;
+align-items: center;
+justify-content: center;
+text-transform: uppercase;
+font-size: inherit;
+
+&.${activeClassName} {
+  background: ${COLOR.DARKBLUE};
+}
 `;
 
 export interface Props {
@@ -53,11 +90,26 @@ export interface Props {
 function Navbar({}: Props) {
   return (
     <Wrapper>
-      <NavItemWrapper><NavItem to="/">Home</NavItem></NavItemWrapper>
-      <NavItemWrapper><NavItem to="search">Search</NavItem></NavItemWrapper>
-      <NavItemWrapper><NavItem to="tags">Tags</NavItem></NavItemWrapper>
-      <NavItemWrapper><NavItem to="profile">Profile</NavItem></NavItemWrapper>
-      <FloatingNavItemWrapper><NavItem to="create">Create</NavItem></FloatingNavItemWrapper>
+      <NavItemWrapper>
+        <NavItem to="/" exact={true} activeClassName={activeClassName}>Home</NavItem>
+      </NavItemWrapper>
+
+      <NavItemWrapper>
+        <NavItem to="/search" activeClassName={activeClassName}>Search</NavItem>
+      </NavItemWrapper>
+
+      <NavItemWrapper>
+        <NavItem to="/tags" activeClassName={activeClassName}>Tags</NavItem>
+      </NavItemWrapper>
+
+      <NavItemWrapper>
+        <NavItem to="/profile" activeClassName={activeClassName}>Profile</NavItem>
+      </NavItemWrapper>
+
+      <FloatingNavItemWrapper>
+        <FloatingNavItem to="/create" activeClassName={activeClassName}>+</FloatingNavItem>
+      </FloatingNavItemWrapper>
+
       {/* <NavItemWrapper><NavItem to="recipe">Recipe</NavItem></NavItemWrapper> */}
     </Wrapper>
   );

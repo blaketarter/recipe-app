@@ -15,7 +15,7 @@ import Navbar from './Navbar';
 
 const Wrapper = styled.div`
   overflow: hidden;
-  background: ${COLOR.WHITE};
+  background: ${COLOR.LIGHTGREY};
   color: ${COLOR.BLACK};
   height: 100vh;
   width: 100vw;
