@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import * as PropTypes from 'prop-types';
 import { Recipe } from '../types';
 import COLOR from '../utils/colors';
 import withProps from '../utils/withProps';
@@ -108,14 +109,23 @@ const Ingredient = styled.p`
   border-radius: 2px;
 `;
 
+interface Context {
+  router: {
+    history: {
+      push: Function;
+    }
+  }
+}
+
 function RecipeTile({
+  id,
   name,
   image,
   color,
   ingredients,
-}: Recipe) {
+}: Recipe, context: Context) {
   return (
-    <Wrapper color={color}>
+    <Wrapper color={color} onClick={() => context.router.history.push(`/recipe/${id}`)}>
       <TopBar>
         <Polygon>
           <Image url={image} color={color} />
@@ -130,5 +140,9 @@ function RecipeTile({
     </Wrapper>
   );
 }
+
+(RecipeTile as any).contextTypes = {
+  router: PropTypes.object,
+};
 
 export default RecipeTile;

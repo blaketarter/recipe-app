@@ -1,14 +1,16 @@
 import * as React from 'react';
 import PageWrapper from './PageWrapper';
+import { Recipe as RecipeType } from '../types';
 
 export interface Props {
-  match?: any;
+  recipe: RecipeType;
 }
 
-function Recipe({ match }: Props) {
+function Recipe({ recipe }: Props) {
   return (
     <PageWrapper>
-      <h1>Recipe Page {match && match.params && match.params.id ? match.params.id : ''}</h1>
+      <h1>Recipe Page</h1>
+      <pre><code>{ JSON.stringify(recipe, null, 2) }</code></pre>
     </PageWrapper>
   );
 }

@@ -11,7 +11,7 @@ import Search from './Search';
 import Tags from './Tags';
 import Profile from './Profile';
 import Create from './Create';
-import Recipe from './Recipe';
+import Recipe from '../containers/Recipe';
 import Navbar from './Navbar';
 import store from '../store';
 
