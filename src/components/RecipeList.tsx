@@ -9,10 +9,10 @@ const ListWrapper = styled.ul`
   padding: 0;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-auto-rows: 1fr;
   grid-gap: 15px;
-  padding: 25px;
+  padding: 15px;
   overflow-y: scroll;
   overflow-x: hidden;
 `;

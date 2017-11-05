@@ -30,7 +30,7 @@ const FloatingNavItemWrapper = styled.li`
   margin: 0;
   padding: 0;
   flex: 1 1 auto;
-  background: ${COLOR.BLUE};
+  background: ${COLOR.PRIMARY};
   color: ${COLOR.BLACK};
   position: absolute;
   top: -32.5px;
@@ -80,7 +80,7 @@ text-transform: uppercase;
 font-size: inherit;
 
 &.${activeClassName} {
-  background: ${COLOR.DARKBLUE};
+  background: ${COLOR.PRIMARY};
 }
 `;
 

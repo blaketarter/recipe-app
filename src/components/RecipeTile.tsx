@@ -101,7 +101,7 @@ const Ingredient = styled.p`
   /* margin: 5px 5px 0 0; */
   margin: 0 0 10px 10px;
   padding: 2px 7px;
-  background: ${COLOR.BLUE};
+  background: ${COLOR.BROWN};
   display: flex;
   align-items: center;
   justify-content: center;
