@@ -5,7 +5,7 @@ import { getRecipe } from '../selectors';
 
 export function mapStateToProps(state: StoreState, { match }: any) {
   return {
-    recipe: getRecipe(state, match.params.id),
+    recipe: getRecipe(state)(match.params.id),
   }
 }
 
