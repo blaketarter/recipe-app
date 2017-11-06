@@ -68,20 +68,20 @@ const NavItem = styled(NavLink).attrs<NavItemInterface>({ activeClassName })`
 `;
 
 const FloatingNavItem = styled(NavLink).attrs<NavItemInterface>({ activeClassName })`
-height: 100%;
-width: 100%;
-text-align: center;
-color: inherit;
-text-decoration: none;
-display: flex;
-align-items: center;
-justify-content: center;
-text-transform: uppercase;
-font-size: inherit;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: inherit;
 
-&.${activeClassName} {
-  background: ${COLOR.PRIMARY};
-}
+  &.${activeClassName} {
+    background: ${COLOR.PRIMARY};
+  }
 `;
 
 export interface Props {
