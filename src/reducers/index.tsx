@@ -6,6 +6,7 @@ export function recipes(state: StoreState, action: RecipeActions): StoreState {
   switch (action.type) {
     case ADD_RECIPE:
       return { ...state, recipes: [...state.recipes, action.payload] };
+    default:
+      return state;
   }
-  return state;
 }

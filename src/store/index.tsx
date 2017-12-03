@@ -4,8 +4,13 @@ import { StoreState } from '../types/index';
 
 import { recipes as defaultRecipes } from '../utils/initfakeData';
 
+interface ReduxDevtoolsWindow extends Window {
+  __REDUX_DEVTOOLS_EXTENSION__: Function;
+}
+
 const store = createStore<StoreState>(recipes, {
   recipes: defaultRecipes,
-},  (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&  (window as any).__REDUX_DEVTOOLS_EXTENSION__());
+}, (window as ReduxDevtoolsWindow).__REDUX_DEVTOOLS_EXTENSION__ &&
+   (window as ReduxDevtoolsWindow).__REDUX_DEVTOOLS_EXTENSION__());  
 
 export default store;

@@ -12,9 +12,9 @@
 // }
 
 enum COLOR {
-  PRIMARY = '#A0BAAA',
-  BROWN = '#E9CD8A',
-  WHITE = '#FCF4ED',
+  PRIMARY = '#80d8a2',
+  BROWN = '#D8CAB4',
+  WHITE = '#ffffff',
   BLACK = '#3A3937',
   GREY = '#72706D',
   LIGHTGREY = '#E5E2DF',

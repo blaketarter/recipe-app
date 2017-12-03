@@ -11,8 +11,8 @@ const ListWrapper = styled.ul`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-auto-rows: 1fr;
-  grid-gap: 15px;
-  padding: 15px;
+  grid-gap: 10px;
+  padding: 10px;
   overflow-y: scroll;
   overflow-x: hidden;
 `;

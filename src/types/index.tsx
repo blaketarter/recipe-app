@@ -8,5 +8,5 @@ export interface Recipe {
 };
 
 export interface StoreState {
-  recipes: Recipe[],
+  readonly recipes: Recipe[],
 }

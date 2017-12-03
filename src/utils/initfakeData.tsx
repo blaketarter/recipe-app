@@ -34,7 +34,7 @@ for (let i = 1, ii = 12; i <= ii; i++) {
     id: `r${i}`,
     name: 'Test Recipe ' + i,
     image: `//lorempixel.com/400/400/food/${Math.min(i, (i % 10) + 1)}`,
-    description: 'this is a recipe',
+    description: 'Irure anim adipisicing incididunt commodo cillum eiusmod id ad irure ex anim. Dolor aliqua amet minim id aliqua Lorem. Aute labore laborum dolor irure deserunt occaecat dolore commodo mollit ad. Occaecat amet nisi ad amet velit cupidatat tempor laboris labore ut sit consequat do sint.',
     color: nicecolors[Object.keys(nicecolors)[Math.floor(Math.random() * Object.keys(nicecolors).length)]],
     ingredients: getRandomXFrom(ingredients, Math.max(10, Math.floor(Math.random() * 15))),
   });
