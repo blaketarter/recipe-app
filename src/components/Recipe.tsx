@@ -3,10 +3,11 @@ import PageWrapper from './PageWrapper';
 import styled from 'styled-components';
 import { Recipe as RecipeType } from '../types';
 import COLOR from '../utils/colors';
-import IngredientTag from './IngredientTag';
+import IngredientsList from './IngredientsList';
 import EditButton from './EditButton';
 import ScrollWrapper from './ScrollWrapper';
 import TopBar from './TopBar';
+import Label from './Label';
 import { boxShadow } from '../utils/metrics';
 
 export interface Props {
@@ -43,20 +44,6 @@ const DescriptionText = styled.p`
   margin: 0 0 25px 0;
 `;
 
-const IngredientsList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const Label = styled.label`
-  color: ${COLOR.LIGHTGREY};
-  display: block;
-  font-size: 10px;
-  text-transform: uppercase;
-  font-weight: bolder;
-  margin-bottom: 5px;
-`;
-
 function Recipe({ recipe }: Props) {
   const { name, image, description, ingredients } = recipe;
   return (
@@ -74,10 +61,7 @@ function Recipe({ recipe }: Props) {
           <Label>Description</Label>
           <DescriptionText>{description}</DescriptionText>
           <Label>Ingredients</Label>
-          <IngredientsList>
-            {ingredients.map((ingredient: string, index: number) => {
-              return (<IngredientTag key={index}>{ingredient}</IngredientTag>);
-            })}</IngredientsList>
+          <IngredientsList ingredients={ingredients} />
         </Body>
       </ScrollWrapper>
     </PageWrapper>

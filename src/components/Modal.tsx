@@ -55,7 +55,7 @@ const ModalWrapper = styled.div`
   flex-direction: column;
   min-height: 150px;
   max-width: 100%;
-`
+`;
 
 const Title = styled.h2`
   text-align: center;
@@ -92,7 +92,7 @@ class Modal extends React.PureComponent<Props, State> {
     showCancel: false,
     cancelText: 'Cancel',
     completeText: 'Complete',
-  }
+  };
 
   constructor(props: Props) {
     super(props);
@@ -105,15 +105,12 @@ class Modal extends React.PureComponent<Props, State> {
     e.preventDefault();
     e.stopPropagation();
 
-    console.log('complete');
-
     if (this.props.onComplete) {
       this.props.onComplete(e);
     }
   }
 
   private onCancelHandler = (e: MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
-    console.log('cancel');
     if (this.props.onCancel) {
       this.props.onCancel(e);
     }
@@ -125,10 +122,14 @@ class Modal extends React.PureComponent<Props, State> {
         <ModalBackDrop onClick={this.onCancelHandler} />
         <ModalWrapper>
           <Title>{this.props.title}</Title>
-          <Body>{ this.props.children }</Body>
+          <Body>{this.props.children}</Body>
           <ActionWrapper>
-            {this.props.showCancel && <CancelButton onClick={this.onCancelHandler}>{this.props.cancelText}</CancelButton>}
-            {this.props.showComplete && <CompleteButton fullMargin={!this.props.showCancel} onClick={this.onCompleteHandler}>{ this.props.completeText }</CompleteButton>}
+            {this.props.showCancel &&
+              <CancelButton onClick={this.onCancelHandler}>{this.props.cancelText}</CancelButton>}
+            {this.props.showComplete &&
+              <CompleteButton fullMargin={!this.props.showCancel} onClick={this.onCompleteHandler}>
+                {this.props.completeText}
+              </CompleteButton>}
           </ActionWrapper>
         </ModalWrapper>
       </Wrapper>

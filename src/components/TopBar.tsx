@@ -83,18 +83,6 @@ class TopBar extends React.PureComponent<Props, State> {
 
   private throttledScroll = throttle(this.handleScroll, 300)
 
-  componentDidMount() {
-    if (this.props.shadowOnScroll) {
-      window.addEventListener('scroll', this.throttledScroll, true);
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.props.shadowOnScroll) {
-      window.removeEventListener('scroll', this.throttledScroll, true);
-    }
-  }
-
   private renderTitle = () => {
     if (this.props.title && this.props.title.length) {
       return (<Title>{this.props.title}</Title>);
@@ -123,12 +111,24 @@ class TopBar extends React.PureComponent<Props, State> {
     return null;
   }
 
+  componentDidMount() {
+    if (this.props.shadowOnScroll) {
+      window.addEventListener('scroll', this.throttledScroll, true);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.props.shadowOnScroll) {
+      window.removeEventListener('scroll', this.throttledScroll, true);
+    }
+  }
+
   render() {
     return (
       <Wrapper showShadow={this.state.showShadow}>
         {this.renderTitle()}
-        <LeftActionWrapper>{ this.renderLeftAction() }</LeftActionWrapper>        
-        <RightActionWrapper>{ this.renderRightAction() }</RightActionWrapper>
+        <LeftActionWrapper>{this.renderLeftAction()}</LeftActionWrapper>        
+        <RightActionWrapper>{this.renderRightAction()}</RightActionWrapper>
       </Wrapper>
     );
   }

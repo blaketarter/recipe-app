@@ -1,11 +1,20 @@
-import { RecipeActions } from '../actions';
-import { StoreState } from '../types/index';
-import { ADD_RECIPE } from '../constants/index';
+import { RecipeActions, NewRecipeActions } from '../actions';
+import { NewRecipeState, RecipesState } from '../types/index';
+import { ADD_RECIPE, ADD_NEW_RECIPE } from '../constants/index';
 
-export function recipes(state: StoreState, action: RecipeActions): StoreState {
+export function recipes(state: RecipesState = [], action: RecipeActions): RecipesState {
   switch (action.type) {
     case ADD_RECIPE:
-      return { ...state, recipes: [...state.recipes, action.payload] };
+      return [...state, action.payload];
+    default:
+      return state;
+  }
+}
+
+export function newRecipe(state: NewRecipeState = {}, action: NewRecipeActions): NewRecipeState {
+  switch (action.type) {
+    case ADD_NEW_RECIPE:
+      return { ...newRecipe, ...action.payload };
     default:
       return state;
   }

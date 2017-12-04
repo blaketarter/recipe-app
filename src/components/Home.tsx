@@ -11,7 +11,7 @@ function Home({ recipes }: Props) {
   return (
     <PageWrapper>
       <TopBar rightAction={<SettingsButton />}>
-        <Logo src={LogoImage} alt='Logo' />
+        <Logo src={LogoImage} alt="Logo" />
       </TopBar>
 
       <RecipeList recipes={recipes} limit={20} />

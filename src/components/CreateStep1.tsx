@@ -3,16 +3,15 @@ import styled from 'styled-components';
 import { MouseEvent, FormEvent } from 'react';
 import { RouterChildContext } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { NewRecipeState } from '../types';
 import Modal from './Modal';
 import Button from './Button';
-import TextInout from './TextInput';
+import TextInput from './TextInput';
+import MdAdd from 'react-icons/lib/md/add';
 import COLOR from '../utils/colors';
 import { boxShadow } from '../utils/metrics';
 
-interface RouterParams {
-
-}
-
+interface RouterParams {}
 
 class CreateStep1 extends React.PureComponent<Props, State> {
   context: RouterChildContext<RouterParams>;
@@ -21,32 +20,35 @@ class CreateStep1 extends React.PureComponent<Props, State> {
     router: PropTypes.object,
   }
 
-  constructor(props: Props) {
+  constructor(newRecipe: Props) {
     super();
-    
+
     this.state = {
-      imageUrl: '',
-      title: '',
-      hasImage: false,
+      image: newRecipe.image || '',
+      name: newRecipe.name || '',
+      hasImage: newRecipe.image && newRecipe.image.length ? true : false,
       showModal: false,
     };
   }
 
   private handleOnClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log('step 1 on click');
-    console.log(this.state);
+    this.props.addNewRecipe({
+      image: this.state.image,
+      name: this.state.name,
+    });
+
     this.context.router.history.push('/create/2');
   }
 
   private handleOnTitleChange = (e: FormEvent<HTMLInputElement>) => {
-    const title = e.currentTarget.value;
-    this.setState(prevState => ({ ...prevState, title }));
+    const name = e.currentTarget.value;
+    this.setState(prevState => ({ ...prevState, name }));
   }
 
   private handleOnImageUrlChange = (e: FormEvent<HTMLInputElement>) => {
-    const imageUrl = e.currentTarget.value;
-    this.setState(prevState => ({ ...prevState, imageUrl }));
+    const image = e.currentTarget.value;
+    this.setState(prevState => ({ ...prevState, image }));
   }
 
   private handleOnCancel = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
@@ -57,18 +59,24 @@ class CreateStep1 extends React.PureComponent<Props, State> {
     this.setState((prevState) => ({ ...prevState, showModal: false, hasImage: true }));
   }
   
-  private handleAddImage = (e: MouseEvent<HTMLDivElement>) => {
+  private handleAddImage = (e: MouseEvent<HTMLDivElement | HTMLImageElement>) => {
     this.setState((prevState) => ({ ...prevState, showModal: true }));
   }
+
+  private renderNoImageTile = () => (
+    <NoImageTile onClick={this.handleAddImage}>
+      <MdAdd size={64} color={COLOR.GREY}/>  
+    </NoImageTile>
+  )
 
   render() {
     return (
       [
         <Hero key="Create1/Hero">
-          { this.state.hasImage ? <RecipeImage src={this.state.imageUrl} /> : <NoImageTile onClick={this.handleAddImage} /> }
+          { this.state.hasImage ? <RecipeImage src={this.state.image} onClick={this.handleAddImage} /> : this.renderNoImageTile() }
         </Hero>,
         <Body key="Create1/Body">
-          <TextInout type='text' placeholder='Recipe Name' value={this.state.title} onChange={this.handleOnTitleChange} />          
+          <TextInput type='text' placeholder='Recipe Name' value={this.state.name} onChange={this.handleOnTitleChange} />
           <NextButton onClick={this.handleOnClick}>Next</NextButton>
         </Body>,
         this.state.showModal && <Modal
@@ -78,23 +86,24 @@ class CreateStep1 extends React.PureComponent<Props, State> {
           onComplete={this.handleOnComplete}
           showCancel={true}
           completeText='Submit'>
-          <TextInout
+          <TextInput
             type="text"
             placeholder="Recipe URL"
-            onChange={this.handleOnImageUrlChange}          
-            value={this.state.imageUrl} />
+            onChange={this.handleOnImageUrlChange}
+            value={this.state.image} />
         </Modal>,
       ]
     );
   }
 }
 
-interface Props {
-};
+interface Props extends NewRecipeState {
+  addNewRecipe: Function;
+}
 
 interface State {
-  imageUrl: string;
-  title: string;
+  image: string;
+  name: string;
   hasImage: boolean;
   showModal: boolean;
 }
@@ -137,6 +146,9 @@ const NoImageTile = styled.div`
   position: relative;
   border: 5px solid ${COLOR.WHITE};
   background: ${COLOR.LIGHTGREY};
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-shadow: ${boxShadow};
 `;
 

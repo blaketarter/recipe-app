@@ -14,3 +14,17 @@ export function AddRecipe(payload: Recipe): AddRecipe {
         payload,
     }
 }
+
+export interface AddNewRecipe {
+    type: constants.ADD_NEW_RECIPE;
+    payload: Partial<Recipe>;
+}
+
+export type NewRecipeActions = AddNewRecipe;
+
+export function AddNewRecipe(payload: Partial<Recipe>): AddNewRecipe {
+    return {
+        type: constants.ADD_NEW_RECIPE,
+        payload,
+    }
+}

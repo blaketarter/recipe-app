@@ -7,7 +7,7 @@ import { StoreState, Recipe } from '../types/index';
 
 export function getRecipes(state: StoreState) {
   return state.recipes;
-};
+}
 
 export const getRecipe = createSelector(
   getRecipes,
