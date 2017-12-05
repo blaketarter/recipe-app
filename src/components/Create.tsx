@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import PageWrapper from './PageWrapper';
 import TopBar from './TopBar';
 import CreateStep1 from '../containers/CreateStep1';
-import CreateStep2 from './CreateStep2';
+import CreateStep2 from '../containers/CreateStep2';
 
 const Create: React.SFC = () => {
     return (

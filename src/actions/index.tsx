@@ -6,7 +6,6 @@ export interface AddRecipe {
     payload: Recipe,
 }
 
-export type RecipeActions = AddRecipe;
 
 export function AddRecipe(payload: Recipe): AddRecipe {
     return {
@@ -15,12 +14,12 @@ export function AddRecipe(payload: Recipe): AddRecipe {
     }
 }
 
+export type RecipeActions = AddRecipe;
+
 export interface AddNewRecipe {
     type: constants.ADD_NEW_RECIPE;
     payload: Partial<Recipe>;
 }
-
-export type NewRecipeActions = AddNewRecipe;
 
 export function AddNewRecipe(payload: Partial<Recipe>): AddNewRecipe {
     return {
@@ -28,3 +27,15 @@ export function AddNewRecipe(payload: Partial<Recipe>): AddNewRecipe {
         payload,
     }
 }
+
+export interface ClearNewRecipe {
+    type: constants.CLEAR_NEW_RECIPE;
+}
+
+export function ClearNewRecipe(): ClearNewRecipe {
+    return {
+        type: constants.CLEAR_NEW_RECIPE,
+    }
+}
+
+export type NewRecipeActions = AddNewRecipe | ClearNewRecipe;

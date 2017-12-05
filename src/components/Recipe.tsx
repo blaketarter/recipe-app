@@ -25,6 +25,7 @@ const Hero = styled.div`
 `;
 
 const Image = styled.img`
+  object-fit: cover;
   width: 80vw;
   height: 80vw;
   max-height: 250px;
@@ -36,6 +37,7 @@ const Image = styled.img`
 `;
 
 const Body = styled.div`
+  flex: 1 1 auto;
   padding: 25px;
   background: ${COLOR.WHITE};
 `;

@@ -1,21 +1,35 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { RouterChildContext } from 'react-router-dom';
 import { MouseEvent, FormEvent } from 'react';
 import { NewRecipeState } from '../types';
 import IngredientsList from './IngredientsList';
+import PropTypes from 'prop-types';
 import Button from './Button';
 import TextArea from './TextArea';
 import Label from './Label';
 import Modal from './Modal';
 import COLOR from '../utils/colors';
 
+interface RouterParams {}
+
 class CreateStep2 extends React.PureComponent<Props, State> {
+  context: RouterChildContext<RouterParams>;
+  
+  static contextTypes = {
+    router: PropTypes.object,
+  }
+  
   private ingredientsTextArea: HTMLTextAreaElement;
 
-  constructor(newRecipe: Props) {
-    super();
+  constructor(props: Props) {
+    super(props);
+    // TODO: clear it out
+    const { newRecipe } = props;
     
     this.state = {
+      name: newRecipe.name || '',
+      image: newRecipe.image || '',
       description: newRecipe.description || '',
       ingredients: newRecipe.ingredients || [],
       showModal: false,
@@ -24,6 +38,17 @@ class CreateStep2 extends React.PureComponent<Props, State> {
 
   private handleOnClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    this.props.addRecipe({
+      name: this.state.name,
+      image: this.state.image,
+      description: this.state.description,
+      ingredients: this.state.ingredients,
+      id: `r${this.props.numberOfRecipes + 1}`,
+    });
+
+    this.props.clearNewRecipe();
+
+    this.context.router.history.push(`/recipe/r${this.props.numberOfRecipes + 1}`);
   }
 
   private onDescriptionChangeHandler = (e: FormEvent<HTMLTextAreaElement>) => {
@@ -33,7 +58,9 @@ class CreateStep2 extends React.PureComponent<Props, State> {
 
   private renderNoIngredients = () => {
     return (
-      <NoIngredients onClick={this.handleAddIngredients}>No ingredients to show yet, click to add some.</NoIngredients>
+      <NoIngredients onClick={this.handleAddIngredients}>
+        No ingredients to show yet, click to add some.
+      </NoIngredients>
     );
   }
 
@@ -83,10 +110,17 @@ class CreateStep2 extends React.PureComponent<Props, State> {
   }
 }
 
-interface Props extends NewRecipeState {
-};
+
+interface Props {
+  addRecipe: Function;
+  clearNewRecipe: Function;
+  newRecipe: NewRecipeState;
+  numberOfRecipes: number;
+}
 
 interface State {
+  name: string;
+  image: string;
   description: string;
   ingredients: string[];
   showModal: boolean;

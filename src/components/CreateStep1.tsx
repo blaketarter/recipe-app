@@ -20,8 +20,11 @@ class CreateStep1 extends React.PureComponent<Props, State> {
     router: PropTypes.object,
   }
 
-  constructor(newRecipe: Props) {
-    super();
+  private textInputRef: HTMLInputElement;
+
+  constructor(props: Props) {
+    super(props);
+    const { newRecipe } = props;
 
     this.state = {
       image: newRecipe.image || '',
@@ -56,7 +59,8 @@ class CreateStep1 extends React.PureComponent<Props, State> {
   }
 
   private handleOnComplete = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
-    this.setState((prevState) => ({ ...prevState, showModal: false, hasImage: true }));
+    const image = this.textInputRef.value;
+    this.setState((prevState) => ({ ...prevState, showModal: false, hasImage: true, image }));
   }
   
   private handleAddImage = (e: MouseEvent<HTMLDivElement | HTMLImageElement>) => {
@@ -89,15 +93,16 @@ class CreateStep1 extends React.PureComponent<Props, State> {
           <TextInput
             type="text"
             placeholder="Recipe URL"
-            onChange={this.handleOnImageUrlChange}
-            value={this.state.image} />
+            innerRef={(ref) => this.textInputRef = ref}
+            onChange={this.handleOnImageUrlChange} />
         </Modal>,
       ]
     );
   }
 }
 
-interface Props extends NewRecipeState {
+interface Props {
+  newRecipe: NewRecipeState;
   addNewRecipe: Function;
 }
 
@@ -153,6 +158,7 @@ const NoImageTile = styled.div`
 `;
 
 const RecipeImage = styled.img`
+  object-fit: cover;
   width: 80vw;
   height: 80vw;
   max-height: 250px;

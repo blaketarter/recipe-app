@@ -1,11 +1,13 @@
 import CreateStep1 from '../components/CreateStep1';
-import { StoreState, NewRecipeState, Recipe } from '../types/index';
+import { StoreState, Recipe } from '../types/index';
 import { AddNewRecipe } from '../actions';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
-export function mapStateToProps(state: StoreState): NewRecipeState {
-  return state.newRecipe;
+export function mapStateToProps(state: StoreState) {
+  return {
+    newRecipe: state.newRecipe,
+  };
 }
 
 export function mapDispatchToProps(dispatch: Dispatch<StoreState>) {
