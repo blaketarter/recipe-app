@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { NewRecipeState } from '../types';
 import Modal from './Modal';
 import Button from './Button';
+import Label from './Label';
 import TextInput from './TextInput';
 import MdAdd from 'react-icons/lib/md/add';
 import COLOR from '../utils/colors';
@@ -80,6 +81,7 @@ class CreateStep1 extends React.PureComponent<Props, State> {
           { this.state.hasImage ? <RecipeImage src={this.state.image} onClick={this.handleAddImage} /> : this.renderNoImageTile() }
         </Hero>,
         <Body key="Create1/Body">
+          <Label>Name</Label>  
           <TextInput type='text' placeholder='Recipe Name' value={this.state.name} onChange={this.handleOnTitleChange} />
           <NextButton onClick={this.handleOnClick}>Next</NextButton>
         </Body>,

@@ -47,14 +47,14 @@ const DescriptionText = styled.p`
 `;
 
 function Recipe({ recipe }: Props) {
-  const { name, image, description, ingredients } = recipe;
+  const { name, image, description, ingredients, id } = recipe;
   return (
     <PageWrapper>
       <TopBar
         title={name}
         shadowOnScroll={true}
         backButton={true}
-        rightAction={<EditButton />} />
+        rightAction={<EditButton recipeId={id} />} />
       <ScrollWrapper>
         <Hero>
           <Image src={image} />

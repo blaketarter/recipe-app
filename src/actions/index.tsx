@@ -6,7 +6,6 @@ export interface AddRecipe {
     payload: Recipe,
 }
 
-
 export function AddRecipe(payload: Recipe): AddRecipe {
     return {
         type: constants.ADD_RECIPE,
@@ -14,7 +13,19 @@ export function AddRecipe(payload: Recipe): AddRecipe {
     }
 }
 
-export type RecipeActions = AddRecipe;
+export interface UpdateRecipe {
+    type: constants.UPDATE_RECIPE;
+    payload: Recipe,
+}
+
+export function UpdateRecipe(payload: Recipe): UpdateRecipe {
+    return {
+        type: constants.UPDATE_RECIPE,
+        payload,
+    }
+}
+
+export type RecipeActions = AddRecipe | UpdateRecipe;
 
 export interface AddNewRecipe {
     type: constants.ADD_NEW_RECIPE;

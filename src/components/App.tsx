@@ -14,16 +14,14 @@ import Tags from './Tags';
 import Profile from './Profile';
 import Create from './Create';
 import Recipe from '../containers/Recipe';
+import RecipeEdit from '../containers/RecipeEdit';
 import Navbar from './Navbar';
 import { configureStore } from '../store';
 
 const { persistor, store } = configureStore();
 
-console.log(store);
-
 class App extends React.Component {
   render() {
-    console.log('here')
     return (
       <Provider store={store}>
         <PersistGate persistor={persistor}>
@@ -35,7 +33,8 @@ class App extends React.Component {
                 <Route path="/tags" component={Tags} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/create" component={Create} />
-                <Route path="/recipe/:id" component={Recipe} />
+                <Route exact={true} path="/recipe/:id" component={Recipe} />
+                <Route path="/recipe/:id/edit" component={RecipeEdit} />
               </Switch>
               <Navbar />
             </Wrapper>

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import COLOR from '../utils/colors';
 import withProps from '../utils/withProps';
+import { boxShadowSmall } from '../utils/metrics';
 
 interface IngredientTagProps {
   compact?: boolean;
@@ -16,6 +17,7 @@ const IngredientTag = withProps<IngredientTagProps>()(styled.p)`
   align-items: center;
   justify-content: center;
   border-radius: 2px;
+  box-shadow: ${boxShadowSmall};
 `;
 
 export default IngredientTag;
