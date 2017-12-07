@@ -25,7 +25,19 @@ export function UpdateRecipe(payload: Recipe): UpdateRecipe {
     }
 }
 
-export type RecipeActions = AddRecipe | UpdateRecipe;
+export interface DeleteRecipe {
+    type: constants.DELETE_RECIPE;
+    payload: Recipe,
+}
+
+export function DeleteRecipe(payload: Recipe): DeleteRecipe {
+    return {
+        type: constants.DELETE_RECIPE,
+        payload,
+    }
+}
+
+export type RecipeActions = AddRecipe | UpdateRecipe | DeleteRecipe;
 
 export interface AddNewRecipe {
     type: constants.ADD_NEW_RECIPE;

@@ -1,6 +1,6 @@
 import { RecipeActions, NewRecipeActions } from '../actions';
 import { NewRecipeState, RecipesState } from '../types/index';
-import { ADD_RECIPE, ADD_NEW_RECIPE, CLEAR_NEW_RECIPE, UPDATE_RECIPE } from '../constants/index';
+import { ADD_RECIPE, ADD_NEW_RECIPE, CLEAR_NEW_RECIPE, UPDATE_RECIPE, DELETE_RECIPE } from '../constants/index';
 
 export function recipes(state: RecipesState = [], action: RecipeActions): RecipesState {
   switch (action.type) {
@@ -13,6 +13,8 @@ export function recipes(state: RecipesState = [], action: RecipeActions): Recipe
         }
         return { ...recipe, ...action.payload };
       });
+    case DELETE_RECIPE:
+      return state.filter(recipe => recipe.id !== action.payload.id);
     default:
       return state;
   }

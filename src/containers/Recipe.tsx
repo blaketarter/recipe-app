@@ -1,8 +1,9 @@
 import Recipe from '../components/Recipe';
-import { StoreState } from '../types/index';
-import { connect } from 'react-redux';
+import { StoreState, Recipe as RecipeType } from '../types';
+import { connect, Dispatch } from 'react-redux';
 import { match as matchProps } from 'react-router-dom';
 import { getRecipe } from '../selectors';
+import { DeleteRecipe } from '../actions';
 
 interface Params {
   id: string;
@@ -18,4 +19,10 @@ export function mapStateToProps(state: StoreState, { match }: Route) {
   }
 }
 
-export default connect(mapStateToProps, null)(Recipe);
+function mapDispatchToProps(dispatch: Dispatch<StoreState>) {
+  return {
+    deleteRecipe: (recipe: RecipeType) => dispatch(DeleteRecipe(recipe)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Recipe as any);

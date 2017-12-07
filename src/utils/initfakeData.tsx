@@ -30,8 +30,9 @@ function getRandomXFrom(list: any[], number: number) {
 }
 
 for (let i = 1, ii = 12; i <= ii; i++) {
+  const now = new Date().getTime();
   recipes.push({
-    id: `r${i}`,
+    id: `${now}`,
     name: 'Test Recipe ' + i,
     image: `//via.placeholder.com/400x400`,
     description: 'Irure anim adipisicing incididunt commodo cillum eiusmod id ad irure ex anim. Dolor aliqua amet minim id aliqua Lorem. Aute labore laborum dolor irure deserunt occaecat dolore commodo mollit ad. Occaecat amet nisi ad amet velit cupidatat tempor laboris labore ut sit consequat do sint.',

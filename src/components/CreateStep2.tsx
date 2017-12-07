@@ -38,17 +38,19 @@ class CreateStep2 extends React.PureComponent<Props, State> {
 
   private handleOnClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    const now = new Date().getTime();
+
     this.props.addRecipe({
       name: this.state.name,
       image: this.state.image,
       description: this.state.description,
       ingredients: this.state.ingredients,
-      id: `r${this.props.numberOfRecipes + 1}`,
+      id: `${now}`,
     });
 
     this.props.clearNewRecipe();
 
-    this.context.router.history.push(`/recipe/r${this.props.numberOfRecipes + 1}`);
+    this.context.router.history.push(`/recipe/${now}`);
   }
 
   private onDescriptionChangeHandler = (e: FormEvent<HTMLTextAreaElement>) => {
