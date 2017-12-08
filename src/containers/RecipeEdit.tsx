@@ -1,7 +1,7 @@
-import RecipeEdit from '../components/RecipeEdit';
-import { StoreState } from '../types/index';
 import { connect, Dispatch } from 'react-redux';
 import { match as matchProps } from 'react-router-dom';
+import RecipeEdit from '../components/RecipeEdit';
+import { StoreState } from '../types/index';
 import { getRecipe } from '../selectors';
 import { UpdateRecipe } from '../actions';
 import { Recipe } from '../types';

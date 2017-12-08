@@ -10,14 +10,9 @@ import { boxShadowSmall } from '../utils/metrics';
 
 interface ImageInterface {
   url?: string;
-  color: string;
 }
 
-interface WrapperInterface {
-  color: string;
-}
-
-const Wrapper = withProps<WrapperInterface>()(styled.li) `
+const Wrapper = styled.li`
   display: flex;
   flex-direction: column;
   height: 175px;
@@ -84,14 +79,13 @@ const RecipeTile: SFC<Recipe> = ({
   id,
   name,
   image,
-  color,
   ingredients,
 }: Recipe, context: Context) => {
   return (
-    <Wrapper color={color} onClick={() => context.router.history.push(`/recipe/${id}`)}>
+    <Wrapper onClick={() => context.router.history.push(`/recipe/${id}`)}>
       <TopBar>
         <Polygon>
-          <Image url={image} color={color} />
+          <Image url={image} />
         </Polygon>
         <Title>{name}</Title>
       </TopBar>

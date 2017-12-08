@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { MouseEvent, FormEvent, ReactSVGElement } from 'react';
-import PageWrapper from './PageWrapper';
 import styled from 'styled-components';
 import { RouterChildContext } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import PageWrapper from './PageWrapper';
 import { Recipe as RecipeType } from '../types';
 import COLOR from '../utils/colors';
 import IngredientsList from './IngredientsList';

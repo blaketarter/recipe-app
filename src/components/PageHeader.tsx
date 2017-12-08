@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import throttle from 'lodash/throttle';
 import COLOR from '../utils/colors';
 import withProps from '../utils/withProps';
-import throttle from 'lodash/throttle';
 import { boxShadowSmall, boxShadowSmallTransparent } from '../utils/metrics';
 
 export interface Props {

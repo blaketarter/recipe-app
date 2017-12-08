@@ -2,6 +2,10 @@ import * as React from 'react';
 import PageWrapper from './PageWrapper';
 import styled from 'styled-components';
 import MdDelete from 'react-icons/lib/md/delete';
+import { MouseEvent } from 'react';
+import { Dispatch } from 'react-redux';
+import { RouterChildContext } from 'react-router';
+import PropTypes from 'prop-types';
 import { Recipe as RecipeType, StoreState } from '../types';
 import COLOR from '../utils/colors';
 import IngredientsList from './IngredientsList';
@@ -10,11 +14,7 @@ import ScrollWrapper from './ScrollWrapper';
 import TopBar from './TopBar';
 import Label from './Label';
 import { boxShadow } from '../utils/metrics';
-import { MouseEvent } from 'react';
-import { Dispatch } from 'react-redux';
-import { RouterChildContext } from 'react-router';
 import Modal from './Modal';
-import PropTypes from 'prop-types';
 
 export interface Props {
   recipe: RecipeType;

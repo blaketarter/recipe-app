@@ -1,8 +1,8 @@
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
 import CreateStep2 from '../components/CreateStep2';
 import { StoreState, Recipe } from '../types/index';
 import { AddRecipe, ClearNewRecipe } from '../actions';
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
 
 export function mapStateToProps(state: StoreState) {
   return {

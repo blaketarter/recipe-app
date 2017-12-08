@@ -1,7 +1,7 @@
+import { match as matchProps } from 'react-router-dom';
+import { connect, Dispatch } from 'react-redux';
 import Recipe from '../components/Recipe';
 import { StoreState, Recipe as RecipeType } from '../types';
-import { connect, Dispatch } from 'react-redux';
-import { match as matchProps } from 'react-router-dom';
 import { getRecipe } from '../selectors';
 import { DeleteRecipe } from '../actions';
 

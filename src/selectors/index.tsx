@@ -1,8 +1,5 @@
 import { createSelector } from 'reselect';
-// import memoize from 'lodash.memoize';
-// import memoize = require('loadash.memoize');
-// import * as memoize from 'lodash.memoize';
-const memoize = require('lodash.memoize');
+import memoize from 'lodash/memoize';
 import { StoreState, Recipe } from '../types/index';
 
 export function getRecipes(state: StoreState) {

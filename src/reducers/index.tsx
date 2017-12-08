@@ -1,6 +1,6 @@
 import { RecipeActions, NewRecipeActions } from '../actions';
-import { NewRecipeState, RecipesState } from '../types/index';
-import { ADD_RECIPE, ADD_NEW_RECIPE, CLEAR_NEW_RECIPE, UPDATE_RECIPE, DELETE_RECIPE } from '../constants/index';
+import { NewRecipeState, RecipesState } from '../types';
+import { ADD_RECIPE, ADD_NEW_RECIPE, CLEAR_NEW_RECIPE, UPDATE_RECIPE, DELETE_RECIPE } from '../constants';
 
 export function recipes(state: RecipesState = [], action: RecipeActions): RecipesState {
   switch (action.type) {
