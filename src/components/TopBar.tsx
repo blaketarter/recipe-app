@@ -15,46 +15,6 @@ class TopBar extends React.PureComponent<Props, State> {
     };
   }
 
-  private handleScroll = (e: UIEvent) => {
-    const target = (e.target as HTMLElement);
-
-    if (target.scrollTop > 0) {
-      this.setState((state, props) => ({ showShadow: true }));
-    } else {
-      this.setState((state, props) => ({ showShadow: false }));
-    }
-  }
-
-  private throttledScroll = throttle(this.handleScroll, 300)
-
-  private renderTitle = () => {
-    if (this.props.title && this.props.title.length) {
-      return (<Title>{this.props.title}</Title>);
-    } else if (React.Children.count(this.props.children)) {
-      return (React.Children.only(this.props.children));
-    }
-
-    return null;
-  }
-
-  private renderLeftAction = () => {
-    if (this.props.backButton) {
-      return (<BackButton />);
-    } else if (React.Children.count(this.props.leftAction)) {
-      return (React.Children.only(this.props.leftAction));
-    }
-
-    return null;
-  }
-
-  private renderRightAction = () => {
-    if (React.Children.count(this.props.rightAction)) {
-      return (React.Children.only(this.props.rightAction));
-    }
-
-    return null;
-  }
-
   componentDidMount() {
     if (this.props.shadowOnScroll) {
       window.addEventListener('scroll', this.throttledScroll, true);
@@ -66,6 +26,46 @@ class TopBar extends React.PureComponent<Props, State> {
       window.removeEventListener('scroll', this.throttledScroll, true);
     }
   }
+  
+  handleScroll = (e: UIEvent) => {
+    const target = (e.target as HTMLElement);
+
+    if (target.scrollTop > 0) {
+      this.setState((state, props) => ({ showShadow: true }));
+    } else {
+      this.setState((state, props) => ({ showShadow: false }));
+    }
+  }
+
+  renderTitle = () => {
+    if (this.props.title && this.props.title.length) {
+      return (<Title>{this.props.title}</Title>);
+    } else if (React.Children.count(this.props.children)) {
+      return (React.Children.only(this.props.children));
+    }
+
+    return null;
+  }
+
+  renderLeftAction = () => {
+    if (this.props.backButton) {
+      return (<BackButton />);
+    } else if (React.Children.count(this.props.leftAction)) {
+      return (React.Children.only(this.props.leftAction));
+    }
+
+    return null;
+  }
+
+  renderRightAction = () => {
+    if (React.Children.count(this.props.rightAction)) {
+      return (React.Children.only(this.props.rightAction));
+    }
+
+    return null;
+  }
+
+  throttledScroll = throttle(this.handleScroll, 300);
 
   render() {
     return (
@@ -79,20 +79,20 @@ class TopBar extends React.PureComponent<Props, State> {
 }
 
 export interface Props {
-  title?: string;
-  shadowOnScroll?: boolean;
-  backButton?: boolean;
-  children?: React.ReactChild;
-  leftAction?: React.ReactChild;
-  rightAction?: React.ReactChild;
+  title?: string,
+  shadowOnScroll?: boolean,
+  backButton?: boolean,
+  children?: React.ReactChild,
+  leftAction?: React.ReactChild,
+  rightAction?: React.ReactChild,
 }
 
 interface State {
-  showShadow: boolean;
+  showShadow: boolean,
 }
 
 interface WrapperProps {
-  showShadow?: boolean;
+  showShadow?: boolean,
 }
 
 const Wrapper = withProps<WrapperProps>()(styled.div)`

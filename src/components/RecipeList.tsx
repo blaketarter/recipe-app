@@ -27,8 +27,8 @@ const ListWrapper = styled.ul`
 `;
 
 export interface Props {
-  recipes: Recipe[];
-  limit?: number;
+  recipes: Recipe[],
+  limit?: number,
 }
 
 export default RecipeList;

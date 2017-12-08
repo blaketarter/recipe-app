@@ -13,7 +13,9 @@ const RecipeTile: SFC<Recipe> = ({
   name,
   image,
   ingredients,
-}: Recipe, context: Context) => {
+}: Recipe,
+  context: Context
+) => {
   return (
     <Wrapper onClick={() => context.router.history.push(`/recipe/${id}`)}>
       <TopBar>
@@ -27,7 +29,7 @@ const RecipeTile: SFC<Recipe> = ({
       </BottomBar>
     </Wrapper>
   );
-}
+};
 
 RecipeTile.contextTypes = {
   router: PropTypes.object,
@@ -36,13 +38,13 @@ RecipeTile.contextTypes = {
 interface Context {
   router: {
     history: {
-      push: Function;
+      push: Function,
     }
   }
 }
 
 interface ImageInterface {
-  url?: string;
+  url?: string,
 }
 
 const Wrapper = styled.li`

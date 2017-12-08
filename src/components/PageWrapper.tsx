@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import withProps from '../utils/withProps';
 
 interface PageWrapperProps {
-  scrollable?: boolean;
+  scrollable?: boolean,
 }
 
 export default withProps<PageWrapperProps>()(styled.div)`

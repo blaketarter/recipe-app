@@ -17,7 +17,7 @@ const IngredientTag = withProps<IngredientTagProps>()(styled.p)`
 `;
 
 interface IngredientTagProps {
-  compact?: boolean;
-};
+  compact?: boolean,
+}
 
 export default IngredientTag;

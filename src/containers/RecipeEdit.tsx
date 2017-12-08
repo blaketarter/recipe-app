@@ -17,13 +17,13 @@ interface Route {
 export function mapStateToProps(state: StoreState, { match }: Route) {
   return {
     recipe: getRecipe(state)(match.params.id),
-  }
+  };
 }
 
 export function mapDispatchToProps(dispatch: Dispatch<StoreState>) {
   return {
     updateRecipe: (recipe: Recipe) => dispatch(UpdateRecipe(recipe)),
-  }
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeEdit as any);

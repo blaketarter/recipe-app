@@ -12,12 +12,20 @@ import TopBar from './TopBar';
 import Label from './Label';
 import TextArea from './TextArea';
 import TextInput from './TextInput';
-import AcceptButton from './AcceptButton'
+import AcceptButton from './AcceptButton';
 import Modal from './Modal';
 import Hero from './HeroColor';
 import RecipeImage from './RecipeImage';
 
 class RecipeEdit extends React.PureComponent<Props, State> {
+  static contextTypes = {
+    router: PropTypes.object,
+  };
+  
+  context: RouterChildContext<RouterParams>;
+  ingredientsTextArea: HTMLTextAreaElement;
+  imageInputRef: HTMLInputElement;
+
   constructor(props: Props) {
     super(props);
 
@@ -29,43 +37,35 @@ class RecipeEdit extends React.PureComponent<Props, State> {
     };
   }
 
-  context: RouterChildContext<RouterParams>;
-  static contextTypes = {
-    router: PropTypes.object,
-  }
-
-  private ingredientsTextArea: HTMLTextAreaElement;
-  private imageInputRef: HTMLInputElement;
-
-  private handleOnTitleChange = (e: FormEvent<HTMLInputElement>) => {
+  handleOnTitleChange = (e: FormEvent<HTMLInputElement>) => {
     const name = e.currentTarget.value;
     this.setState(prevState => ({ ...prevState, name }));
   }
 
-  private handleOnImageUrlChange = (e: FormEvent<HTMLInputElement>) => {
+  handleOnImageUrlChange = (e: FormEvent<HTMLInputElement>) => {
     const image = e.currentTarget.value;
     this.setState(prevState => ({ ...prevState, image }));
   }
 
-  private handleOnImageCancel = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
+  handleOnImageCancel = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     this.setState((prevState) => ({ ...prevState, showImageModal: false }));
   }
 
-  private handleOnImageComplete = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
+  handleOnImageComplete = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     const image = this.imageInputRef.value;
     this.setState((prevState) => ({ ...prevState, showImageModal: false, hasImage: true, image }));
   }
   
-  private handleAddImage = (e: MouseEvent<HTMLDivElement | HTMLImageElement>) => {
+  handleAddImage = (e: MouseEvent<HTMLDivElement | HTMLImageElement>) => {
     this.setState((prevState) => ({ ...prevState, showImageModal: true }));
   }
 
-  private onDescriptionChangeHandler = (e: FormEvent<HTMLTextAreaElement>) => {
+  onDescriptionChangeHandler = (e: FormEvent<HTMLTextAreaElement>) => {
     const description = e.currentTarget.value;
     this.setState(prevState => ({ ...prevState, description }));
   }
 
-  private handleAddIngredients = (e: MouseEvent<HTMLParagraphElement | HTMLDivElement>) => {
+  handleAddIngredients = (e: MouseEvent<HTMLParagraphElement | HTMLDivElement>) => {
     this.setState((prevState) => ({ ...prevState, showIngredientsModal: true }), () => {
       this.ingredientsTextArea.value = this.state.ingredients
         .reduce((IngredientsStr, ingredient) => IngredientsStr += `${ingredient}, `, '')
@@ -73,11 +73,11 @@ class RecipeEdit extends React.PureComponent<Props, State> {
     });
   }
 
-  private handleOnIngredientsCancel = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
+  handleOnIngredientsCancel = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     this.setState((prevState) => ({ ...prevState, showIngredientsModal: false }));
   }
 
-  private handleOnIngredientsComplete = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
+  handleOnIngredientsComplete = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     const ingredients =
       this.ingredientsTextArea.value
         .trim()
@@ -87,7 +87,7 @@ class RecipeEdit extends React.PureComponent<Props, State> {
     this.setState((prevState) => ({ ...prevState, showIngredientsModal: false, ingredients }));
   }
 
-  private handleOnClick = (e: MouseEvent<ReactSVGElement>) => {
+  handleOnClick = (e: MouseEvent<ReactSVGElement>) => {
     e.preventDefault();
     this.props.updateRecipe({
       name: this.state.name,
@@ -108,40 +108,51 @@ class RecipeEdit extends React.PureComponent<Props, State> {
           title={`Editing ${name}`}
           shadowOnScroll={true}
           backButton={true}
-          rightAction={<AcceptButton onClick={this.handleOnClick} />}/>
+          rightAction={<AcceptButton onClick={this.handleOnClick} />}
+        />
         <ScrollWrapper>
           <Hero>
             <RecipeImage src={image} onClick={this.handleAddImage} />
           </Hero>
           <Body>
             <Label>Name</Label>
-            <TextInputWithMargin type='text' placeholder='Recipe Name' value={name} onChange={this.handleOnTitleChange} />
+            <TextInputWithMargin
+              type="text"
+              placeholder="Recipe Name"
+              value={name}
+              onChange={this.handleOnTitleChange}
+            />
             <Label>Description</Label>
             <TextAreaWithMargin value={description} onChange={this.onDescriptionChangeHandler} />
             <Label>Ingredients</Label>
             <IngredientsList ingredients={ingredients} onClick={this.handleAddIngredients} />
           </Body>
         </ScrollWrapper>
-        {this.state.showImageModal && <Modal
-          title="Recipe Image URL"
-          onCancel={this.handleOnImageCancel}
-          onComplete={this.handleOnImageComplete}
-          showCancel={true}
-          completeText='Submit'>
-          <TextInput
-            type="text"
-            placeholder="Recipe URL"
-            innerRef={(ref) => this.imageInputRef = ref}
-            onChange={this.handleOnImageUrlChange} />
-        </Modal>}
-        {this.state.showIngredientsModal && <Modal
-          title="Recipe Ingredients"
-          onCancel={this.handleOnIngredientsCancel}
-          onComplete={this.handleOnIngredientsComplete}
-          showCancel={true}
-          completeText='Submit'>
-          <TextAreaWithMargin innerRef={(ref) => this.ingredientsTextArea = ref} />
-        </Modal>}
+        { this.state.showImageModal &&
+          <Modal
+            title="Recipe Image URL"
+            onCancel={this.handleOnImageCancel}
+            onComplete={this.handleOnImageComplete}
+            showCancel={true}
+            completeText="Submit"
+          >
+            <TextInput
+              type="text"
+              placeholder="Recipe URL"
+              innerRef={(ref) => this.imageInputRef = ref}
+              onChange={this.handleOnImageUrlChange}
+            />
+          </Modal> }
+        { this.state.showIngredientsModal &&
+          <Modal
+            title="Recipe Ingredients"
+            onCancel={this.handleOnIngredientsCancel}
+            onComplete={this.handleOnIngredientsComplete}
+            showCancel={true}
+            completeText="Submit"
+          >
+            <TextAreaWithMargin innerRef={(ref) => this.ingredientsTextArea = ref} />
+          </Modal>}
       </PageWrapper>
     );
   }
@@ -150,13 +161,13 @@ class RecipeEdit extends React.PureComponent<Props, State> {
 interface RouterParams { }
 
 export interface Props {
-  recipe: RecipeType;
-  updateRecipe: Function;
+  recipe: RecipeType,
+  updateRecipe: Function,
 }
 
 export interface State extends RecipeType {
-  showImageModal: boolean;
-  showIngredientsModal: boolean;
+  showImageModal: boolean,
+  showIngredientsModal: boolean,
 }
 
 const Body = styled.div`

@@ -18,6 +18,12 @@ import Hero from './HeroColor';
 import RecipeImage from './RecipeImage';
 
 class Recipe extends React.PureComponent<Props, State> {
+  static contextTypes = {
+    router: PropTypes.object,
+  };
+
+  context: RouterChildContext<RouterParams>;
+
   constructor(props: Props) {
     super(props);
 
@@ -26,27 +32,21 @@ class Recipe extends React.PureComponent<Props, State> {
     };
   }
 
-  context: RouterChildContext<RouterParams>;
-  
-  static contextTypes = {
-    router: PropTypes.object,
-  }
-
-  private handleOnCancel = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
+  handleOnCancel = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     this.setState((prevState) => ({ ...prevState, showModal: false }));
   }
 
-  private handleOnComplete = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
+  handleOnComplete = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     this.setState((prevState) => ({ ...prevState, showModal: false, }));
     this.props.deleteRecipe(this.props.recipe);
     this.context.router.history.replace('/');
   }
 
-  private handleOnDeleteClick = (e: MouseEvent<HTMLDivElement>) => {
+  handleOnDeleteClick = (e: MouseEvent<HTMLDivElement>) => {
     this.setState((prevState) => ({ ...prevState, showModal: true, }));
   }
 
-  private renderDeleteIcon = () => (
+  renderDeleteIcon = () => (
     <DeleteWrapper onClick={this.handleOnDeleteClick}>
       <MdDelete size={24} />
     </DeleteWrapper>
@@ -62,11 +62,12 @@ class Recipe extends React.PureComponent<Props, State> {
           title={name}
           shadowOnScroll={true}
           backButton={true}
-          rightAction={<EditButton recipeId={id} />} />
+          rightAction={<EditButton recipeId={id} />}
+        />
         <ScrollWrapper>
           <Hero>
             <RecipeImage src={image} />
-            { this.renderDeleteIcon() }
+            {this.renderDeleteIcon()}
           </Hero>
           <Body>
             <Label>Description</Label>
@@ -75,27 +76,29 @@ class Recipe extends React.PureComponent<Props, State> {
             <IngredientsList ingredients={ingredients} />
           </Body>
         </ScrollWrapper>
-        { this.state.showModal && <Modal
-          key="Recipe/Delete"
-          title="Delete Recipe"
-          onCancel={this.handleOnCancel}
-          onComplete={this.handleOnComplete}
-          showCancel={true}
-          completeText='Delete'>
-          <DeleteText>{`Are you sure you want to delete ${recipe.name}?`}</DeleteText>
-        </Modal> }
+        { this.state.showModal &&
+          <Modal
+            key="Recipe/Delete"
+            title="Delete Recipe"
+            onCancel={this.handleOnCancel}
+            onComplete={this.handleOnComplete}
+            showCancel={true}
+            completeText="Delete"
+          >
+            <DeleteText>{`Are you sure you want to delete ${recipe.name}?`}</DeleteText>
+          </Modal> }
       </PageWrapper>
     );
   }
 }
 
 export interface Props {
-  recipe: RecipeType;
-  deleteRecipe: (recipe: RecipeType) => Dispatch<StoreState>;
+  recipe: RecipeType,
+  deleteRecipe: (recipe: RecipeType) => Dispatch<StoreState>,
 }
 
 interface State {
-  showModal: boolean;
+  showModal: boolean,
 }
 
 interface RouterParams {}

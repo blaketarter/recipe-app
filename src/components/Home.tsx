@@ -20,7 +20,7 @@ function Home({ recipes }: Props) {
 }
 
 interface Props {
-  recipes: Recipe[];
+  recipes: Recipe[],
 }
 
 const Logo = styled.img`

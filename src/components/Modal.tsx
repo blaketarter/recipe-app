@@ -58,13 +58,13 @@ class Modal extends React.PureComponent<Props, State> {
 }
 
 export interface Props {
-  title: string;
-  onComplete?: Function;
-  onCancel?: Function;
-  showComplete?: boolean;
-  showCancel?: boolean;
-  completeText?: string;
-  cancelText?: string;
+  title: string,
+  onComplete?: Function,
+  onCancel?: Function,
+  showComplete?: boolean,
+  showCancel?: boolean,
+  completeText?: string,
+  cancelText?: string,
 }
 
 interface State {}
@@ -72,7 +72,7 @@ interface State {}
 interface WrapperProps {}
 
 interface CompleteProps {
-  fullMargin: boolean;
+  fullMargin: boolean,
 }
 
 const Wrapper = withProps<WrapperProps>()(styled.div)`

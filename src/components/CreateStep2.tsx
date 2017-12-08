@@ -12,17 +12,15 @@ import Modal from './Modal';
 import COLOR from '../utils/colors';
 
 class CreateStep2 extends React.PureComponent<Props, State> {
-  context: RouterChildContext<RouterParams>;
-  
   static contextTypes = {
     router: PropTypes.object,
-  }
-  
-  private ingredientsTextArea: HTMLTextAreaElement;
+  };
+
+  context: RouterChildContext<RouterParams>;
+  ingredientsTextArea: HTMLTextAreaElement;
 
   constructor(props: Props) {
     super(props);
-    // TODO: clear it out
     const { newRecipe } = props;
     
     this.state = {
@@ -34,7 +32,7 @@ class CreateStep2 extends React.PureComponent<Props, State> {
     };
   }
 
-  private handleOnClick = (e: MouseEvent<HTMLButtonElement>) => {
+  handleOnClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const now = new Date().getTime();
 
@@ -47,16 +45,15 @@ class CreateStep2 extends React.PureComponent<Props, State> {
     });
 
     this.props.clearNewRecipe();
-
     this.context.router.history.push(`/recipe/${now}`);
   }
 
-  private onDescriptionChangeHandler = (e: FormEvent<HTMLTextAreaElement>) => {
+  onDescriptionChangeHandler = (e: FormEvent<HTMLTextAreaElement>) => {
     const description = e.currentTarget.value;
     this.setState(prevState => ({ ...prevState, description }));
   }
 
-  private renderNoIngredients = () => {
+  renderNoIngredients = () => {
     return (
       <NoIngredients onClick={this.handleAddIngredients}>
         No ingredients to show yet, click to add some.
@@ -64,7 +61,7 @@ class CreateStep2 extends React.PureComponent<Props, State> {
     );
   }
 
-  private handleAddIngredients = (e: MouseEvent<HTMLParagraphElement | HTMLDivElement>) => {
+  handleAddIngredients = (e: MouseEvent<HTMLParagraphElement | HTMLDivElement>) => {
     this.setState((prevState) => ({ ...prevState, showModal: true }), () => {
       this.ingredientsTextArea.value = this.state.ingredients
         .reduce((IngredientsStr, ingredient) => IngredientsStr += `${ingredient}, `, '')
@@ -72,11 +69,11 @@ class CreateStep2 extends React.PureComponent<Props, State> {
     });
   }
 
-  private handleOnCancel = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
+  handleOnCancel = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     this.setState((prevState) => ({ ...prevState, showModal: false }));
   }
 
-  private handleOnComplete = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
+  handleOnComplete = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     const ingredients =
       this.ingredientsTextArea.value
         .trim()
@@ -89,40 +86,48 @@ class CreateStep2 extends React.PureComponent<Props, State> {
   render() {
     return (
       [
-        <Body key="Create2/Body">
-          <Label>Description</Label>
-          <TextAreaWithMargin value={this.state.description} onChange={this.onDescriptionChangeHandler} />
-          <Label>Ingredients</Label>
-          { this.state.ingredients.length ? <IngredientsList ingredients={this.state.ingredients} onClick={this.handleAddIngredients} /> : this.renderNoIngredients() }
-          <NextButton onClick={this.handleOnClick}>Next</NextButton>
-        </Body>,
-        this.state.showModal && <Modal
-          key="Create2/Modal"
-          title="Recipe Ingredients"
-          onCancel={this.handleOnCancel}
-          onComplete={this.handleOnComplete}
-          showCancel={true}
-          completeText='Submit'>
-          <TextAreaWithMargin innerRef={(ref) => this.ingredientsTextArea = ref} />
-        </Modal>
+        (
+          <Body key="Create2/Body">
+            <Label>Description</Label>
+            <TextAreaWithMargin value={this.state.description} onChange={this.onDescriptionChangeHandler} />
+            <Label>Ingredients</Label>
+            { this.state.ingredients.length ?
+              <IngredientsList ingredients={this.state.ingredients} onClick={this.handleAddIngredients} /> :
+              this.renderNoIngredients() }
+            <NextButton onClick={this.handleOnClick}>Next</NextButton>
+          </Body>
+        ),
+        this.state.showModal &&
+        (
+          <Modal
+            key="Create2/Modal"
+            title="Recipe Ingredients"
+            onCancel={this.handleOnCancel}
+            onComplete={this.handleOnComplete}
+            showCancel={true}
+            completeText="Submit"
+          >
+            <TextAreaWithMargin innerRef={(ref) => this.ingredientsTextArea = ref} />
+          </Modal>
+        )
       ]
     );
   }
 }
 
 interface Props {
-  addRecipe: Function;
-  clearNewRecipe: Function;
-  newRecipe: NewRecipeState;
-  numberOfRecipes: number;
+  addRecipe: Function,
+  clearNewRecipe: Function,
+  newRecipe: NewRecipeState,
+  numberOfRecipes: number,
 }
 
 interface State {
-  name: string;
-  image: string;
-  description: string;
-  ingredients: string[];
-  showModal: boolean;
+  name: string,
+  image: string,
+  description: string,
+  ingredients: string[],
+  showModal: boolean,
 }
 
 interface RouterParams {}

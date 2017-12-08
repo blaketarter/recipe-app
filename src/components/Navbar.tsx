@@ -48,7 +48,7 @@ function Navbar({}: Props) {
 export interface Props { }
 
 interface NavItemInterface {
-  activeClassName: string;
+  activeClassName: string,
 }
 
 const NavItem = styled(NavLink).attrs<NavItemInterface>({ activeClassName })`

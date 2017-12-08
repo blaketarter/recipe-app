@@ -6,10 +6,10 @@ const AcceptButton: SFC<Props> = ({ onClick }: Props) => {
   return (
     <MdCheck size={24} onClick={onClick} />
   );
-}
+};
 
 interface Props {
-  onClick: (e: MouseEvent<ReactSVGElement>) => void;
-};
+  onClick: (e: MouseEvent<ReactSVGElement>) => void,
+}
 
 export default AcceptButton;

@@ -15,13 +15,12 @@ import Hero from './HeroColor';
 import RecipeImage from './RecipeImage';
 
 class CreateStep1 extends React.PureComponent<Props, State> {
-  context: RouterChildContext<RouterParams>;
-
   static contextTypes = {
     router: PropTypes.object,
-  }
+  };
 
-  private textInputRef: HTMLInputElement;
+  context: RouterChildContext<RouterParams>;
+  textInputRef: HTMLInputElement;
 
   constructor(props: Props) {
     super(props);
@@ -35,7 +34,7 @@ class CreateStep1 extends React.PureComponent<Props, State> {
     };
   }
 
-  private handleOnClick = (e: MouseEvent<HTMLButtonElement>) => {
+  handleOnClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     this.props.addNewRecipe({
       image: this.state.image,
@@ -45,30 +44,30 @@ class CreateStep1 extends React.PureComponent<Props, State> {
     this.context.router.history.push('/create/2');
   }
 
-  private handleOnTitleChange = (e: FormEvent<HTMLInputElement>) => {
+  handleOnTitleChange = (e: FormEvent<HTMLInputElement>) => {
     const name = e.currentTarget.value;
     this.setState(prevState => ({ ...prevState, name }));
   }
 
-  private handleOnImageUrlChange = (e: FormEvent<HTMLInputElement>) => {
+  handleOnImageUrlChange = (e: FormEvent<HTMLInputElement>) => {
     const image = e.currentTarget.value;
     this.setState(prevState => ({ ...prevState, image }));
   }
 
-  private handleOnCancel = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
+  handleOnCancel = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     this.setState((prevState) => ({ ...prevState, showModal: false }));
   }
 
-  private handleOnComplete = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
+  handleOnComplete = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     const image = this.textInputRef.value;
     this.setState((prevState) => ({ ...prevState, showModal: false, hasImage: true, image }));
   }
   
-  private handleAddImage = (e: MouseEvent<HTMLDivElement | HTMLImageElement>) => {
+  handleAddImage = (e: MouseEvent<HTMLDivElement | HTMLImageElement>) => {
     this.setState((prevState) => ({ ...prevState, showModal: true }));
   }
 
-  private renderNoImageTile = () => (
+  renderNoImageTile = () => (
     <NoImageTile onClick={this.handleAddImage}>
       <MdAdd size={64} color={COLOR.GREY}/>  
     </NoImageTile>
@@ -77,42 +76,58 @@ class CreateStep1 extends React.PureComponent<Props, State> {
   render() {
     return (
       [
-        <Hero key="Create1/Hero">
-          { this.state.hasImage ? <RecipeImage src={this.state.image} onClick={this.handleAddImage} /> : this.renderNoImageTile() }
-        </Hero>,
-        <Body key="Create1/Body">
-          <Label>Name</Label>  
-          <TextInput type='text' placeholder='Recipe Name' value={this.state.name} onChange={this.handleOnTitleChange} />
-          <NextButton onClick={this.handleOnClick}>Next</NextButton>
-        </Body>,
-        this.state.showModal && <Modal
-          key="Create1/Modal"
-          title="Recipe Image URL"
-          onCancel={this.handleOnCancel}
-          onComplete={this.handleOnComplete}
-          showCancel={true}
-          completeText='Submit'>
-          <TextInput
-            type="text"
-            placeholder="Recipe URL"
-            innerRef={(ref) => this.textInputRef = ref}
-            onChange={this.handleOnImageUrlChange} />
-        </Modal>,
+        (
+          <Hero key="Create1/Hero">
+            { this.state.hasImage ?
+              <RecipeImage src={this.state.image} onClick={this.handleAddImage} /> :
+              this.renderNoImageTile() }
+          </Hero>
+        ),
+        (
+          <Body key="Create1/Body">
+            <Label>Name</Label>  
+            <TextInput
+              type="text"
+              placeholder="Recipe Name"
+              value={this.state.name}
+              onChange={this.handleOnTitleChange}
+            />
+            <NextButton onClick={this.handleOnClick}>Next</NextButton>
+          </Body>
+        ),
+        this.state.showModal &&
+        (
+          <Modal
+            key="Create1/Modal"
+            title="Recipe Image URL"
+            onCancel={this.handleOnCancel}
+            onComplete={this.handleOnComplete}
+            showCancel={true}
+            completeText="Submit"
+          >
+            <TextInput
+              type="text"
+              placeholder="Recipe URL"
+              innerRef={(ref) => this.textInputRef = ref}
+              onChange={this.handleOnImageUrlChange}
+            />
+          </Modal>
+        ),
       ]
     );
   }
 }
 
 interface Props {
-  newRecipe: NewRecipeState;
-  addNewRecipe: Function;
+  newRecipe: NewRecipeState,
+  addNewRecipe: Function,
 }
 
 interface State {
-  image: string;
-  name: string;
-  hasImage: boolean;
-  showModal: boolean;
+  image: string,
+  name: string,
+  hasImage: boolean,
+  showModal: boolean,
 }
 
 interface RouterParams {}

@@ -6,17 +6,17 @@ import { getRecipe } from '../selectors';
 import { DeleteRecipe } from '../actions';
 
 interface Params {
-  id: string;
+  id: string,
 }
 
 interface Route {
-  match: matchProps<Params>;
+  match: matchProps<Params>,
 }
 
 export function mapStateToProps(state: StoreState, { match }: Route) {
   return {
     recipe: getRecipe(state)(match.params.id),
-  }
+  };
 }
 
 function mapDispatchToProps(dispatch: Dispatch<StoreState>) {
