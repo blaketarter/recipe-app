@@ -1,9 +1,6 @@
 import * as React from 'react';
 import PageWrapper from './PageWrapper';
 
-export interface Props {
-}
-
 function Tags({}: Props) {
   return (
     <PageWrapper>
@@ -11,5 +8,7 @@ function Tags({}: Props) {
     </PageWrapper>
   );
 }
+
+export interface Props {}
 
 export default Tags;

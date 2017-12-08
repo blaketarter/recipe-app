@@ -1,8 +1,17 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Recipe } from '../types';
-
 import RecipeTile from './RecipeTile';
+
+function RecipeList({ recipes, limit }: Props) {
+  return (
+    <ListWrapper>
+      {recipes.slice(0, (limit) ? limit : recipes.length).map((recipe: Recipe) => {
+        return (<RecipeTile {...recipe} key={recipe.id} />);
+      })} 
+   </ListWrapper>
+  );
+}
 
 const ListWrapper = styled.ul`
   margin: 0;
@@ -20,16 +29,6 @@ const ListWrapper = styled.ul`
 export interface Props {
   recipes: Recipe[];
   limit?: number;
-}
-
-function RecipeList({ recipes, limit }: Props) {
-  return (
-    <ListWrapper>
-      {recipes.slice(0, (limit) ? limit : recipes.length).map((recipe: Recipe) => {
-        return (<RecipeTile {...recipe} key={recipe.id} />);
-      })} 
-   </ListWrapper>
-  );
 }
 
 export default RecipeList;

@@ -4,8 +4,6 @@ import COLOR from '../utils/colors';
 import { boxShadow, boxShadowDark } from '../utils/metrics';
 
 const TextArea = styled.textarea`
-  /* min-height: 40px; */
-  /* max-height: 200px; */
   height: 150px;
   width: 100%;
   background: ${COLOR.WHITE};

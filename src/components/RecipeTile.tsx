@@ -8,6 +8,41 @@ import withProps from '../utils/withProps';
 import IngredientTag from './IngredientTag';
 import { boxShadowSmall } from '../utils/metrics';
 
+const RecipeTile: SFC<Recipe> = ({
+  id,
+  name,
+  image,
+  ingredients,
+}: Recipe, context: Context) => {
+  return (
+    <Wrapper onClick={() => context.router.history.push(`/recipe/${id}`)}>
+      <TopBar>
+        <Polygon>
+          <Image url={image} />
+        </Polygon>
+        <Title>{name}</Title>
+      </TopBar>
+      <BottomBar>
+        {ingredients.map((ingredient: string, index: number) => {
+          return (<IngredientTag key={index} compact={true}>{ingredient}</IngredientTag>);
+        })}
+      </BottomBar>
+    </Wrapper>
+  );
+}
+
+RecipeTile.contextTypes = {
+  router: PropTypes.object,
+};
+
+interface Context {
+  router: {
+    history: {
+      push: Function;
+    }
+  }
+}
+
 interface ImageInterface {
   url?: string;
 }
@@ -66,40 +101,5 @@ const BottomBar = styled.div`
   flex: 1 1 auto;
   overflow-x: scroll;
 `;
-
-interface Context {
-  router: {
-    history: {
-      push: Function;
-    }
-  }
-}
-
-const RecipeTile: SFC<Recipe> = ({
-  id,
-  name,
-  image,
-  ingredients,
-}: Recipe, context: Context) => {
-  return (
-    <Wrapper onClick={() => context.router.history.push(`/recipe/${id}`)}>
-      <TopBar>
-        <Polygon>
-          <Image url={image} />
-        </Polygon>
-        <Title>{name}</Title>
-      </TopBar>
-      <BottomBar>
-        {ingredients.map((ingredient: string, index: number) => {
-          return (<IngredientTag key={index} compact={true}>{ingredient}</IngredientTag>);
-        })}
-      </BottomBar>
-    </Wrapper>
-  );
-}
-
-RecipeTile.contextTypes = {
-  router: PropTypes.object,
-};
 
 export default RecipeTile;

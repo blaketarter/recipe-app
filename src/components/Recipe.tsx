@@ -16,61 +16,6 @@ import Label from './Label';
 import { boxShadow } from '../utils/metrics';
 import Modal from './Modal';
 
-export interface Props {
-  recipe: RecipeType;
-  deleteRecipe: (recipe: RecipeType) => Dispatch<StoreState>;
-}
-
-interface State {
-  showModal: boolean;
-}
-
-interface RouterParams {}
-
-const Hero = styled.div`
-  background: ${COLOR.PRIMARY};
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  flex: 1 0 auto;
-  padding-bottom: 25px;
-  padding-top: 5px;
-  position: relative;  
-`;
-
-const Image = styled.img`
-  object-fit: cover;
-  width: 80vw;
-  height: 80vw;
-  max-height: 250px;
-  max-width: 250px;
-  border-radius: 50%;
-  position: relative;
-  border: 5px solid ${COLOR.WHITE};
-  box-shadow: ${boxShadow};
-`;
-
-const Body = styled.div`
-  flex: 1 1 auto;
-  padding: 25px;
-  background: ${COLOR.WHITE};
-`;
-
-const DescriptionText = styled.p`
-  margin: 0 0 25px 0;
-`;
-
-const DeleteWrapper = styled.div`
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  color: ${COLOR.BLACK};
-`;
-
-const DeleteText = styled.p`
-  margin: 0;
-`;
-
 class Recipe extends React.PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -142,5 +87,60 @@ class Recipe extends React.PureComponent<Props, State> {
     );
   }
 }
+
+export interface Props {
+  recipe: RecipeType;
+  deleteRecipe: (recipe: RecipeType) => Dispatch<StoreState>;
+}
+
+interface State {
+  showModal: boolean;
+}
+
+interface RouterParams {}
+
+const Hero = styled.div`
+  background: ${COLOR.PRIMARY};
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex: 1 0 auto;
+  padding-bottom: 25px;
+  padding-top: 5px;
+  position: relative;  
+`;
+
+const Image = styled.img`
+  object-fit: cover;
+  width: 80vw;
+  height: 80vw;
+  max-height: 250px;
+  max-width: 250px;
+  border-radius: 50%;
+  position: relative;
+  border: 5px solid ${COLOR.WHITE};
+  box-shadow: ${boxShadow};
+`;
+
+const Body = styled.div`
+  flex: 1 1 auto;
+  padding: 25px;
+  background: ${COLOR.WHITE};
+`;
+
+const DescriptionText = styled.p`
+  margin: 0 0 25px 0;
+`;
+
+const DeleteWrapper = styled.div`
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: ${COLOR.BLACK};
+`;
+
+const DeleteText = styled.p`
+  margin: 0;
+`;
 
 export default Recipe;

@@ -3,10 +3,6 @@ import COLOR from '../utils/colors';
 import withProps from '../utils/withProps';
 import { boxShadowSmall } from '../utils/metrics';
 
-interface IngredientTagProps {
-  compact?: boolean;
-};
-
 const IngredientTag = withProps<IngredientTagProps>()(styled.p)`
   color: ${COLOR.BLACK};
   font-size: 12px;
@@ -19,5 +15,9 @@ const IngredientTag = withProps<IngredientTagProps>()(styled.p)`
   border-radius: 2px;
   box-shadow: ${boxShadowSmall};
 `;
+
+interface IngredientTagProps {
+  compact?: boolean;
+};
 
 export default IngredientTag;

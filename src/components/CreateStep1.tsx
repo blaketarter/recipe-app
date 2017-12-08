@@ -12,8 +12,6 @@ import MdAdd from 'react-icons/lib/md/add';
 import COLOR from '../utils/colors';
 import { boxShadow } from '../utils/metrics';
 
-interface RouterParams {}
-
 class CreateStep1 extends React.PureComponent<Props, State> {
   context: RouterChildContext<RouterParams>;
 
@@ -115,14 +113,7 @@ interface State {
   showModal: boolean;
 }
 
-// const Label = styled.label`
-//   color: ${COLOR.LIGHTGREY};
-//   display: block;
-//   font-size: 10px;
-//   text-transform: uppercase;
-//   font-weight: bolder;
-//   margin-bottom: 5px;
-// `;
+interface RouterParams {}
 
 const Hero = styled.div`
   background: ${COLOR.PRIMARY};

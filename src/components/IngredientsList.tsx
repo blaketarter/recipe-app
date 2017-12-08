@@ -3,7 +3,6 @@ import { SFC, MouseEvent } from 'react';
 import styled from 'styled-components';
 import IngredientTag from './IngredientTag';
 
-const ingredientsListOnClick = (onClickMethod: Function) => (e: MouseEvent<HTMLDivElement>) => onClickMethod(e);
 
 const IngredientsList: SFC<Props> = ({ ingredients = [], onClick = () => {} }: Props) => (
   <IngredientsListWrapper onClick={ingredientsListOnClick(onClick)}>
@@ -12,6 +11,8 @@ const IngredientsList: SFC<Props> = ({ ingredients = [], onClick = () => {} }: P
     })}
   </IngredientsListWrapper>
 );
+
+const ingredientsListOnClick = (onClickMethod: Function) => (e: MouseEvent<HTMLDivElement>) => onClickMethod(e);
 
 interface Props {
   ingredients: string[];

@@ -5,11 +5,6 @@ import { RouterChildContext, NavLink } from 'react-router-dom';
 import MdEdit from 'react-icons/lib/md/edit';
 import styled from 'styled-components';
 
-interface Props {
-  recipeId: string;
-};
-
-interface Params { };
 
 const EditButton: SFC<Props> = ({ recipeId }: Props, { router }: RouterChildContext<Params>) => {
   return (
@@ -22,6 +17,12 @@ const EditButton: SFC<Props> = ({ recipeId }: Props, { router }: RouterChildCont
 EditButton.contextTypes = {
   router: PropTypes.object,
 };
+
+interface Props {
+  recipeId: string;
+};
+
+interface Params { };
 
 const StyledLink = styled(NavLink) `
   color: inherit;

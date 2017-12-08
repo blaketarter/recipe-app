@@ -16,54 +16,6 @@ import AcceptButton from './AcceptButton'
 import Modal from './Modal';
 import { boxShadow } from '../utils/metrics';
 
-interface RouterParams { }
-
-export interface Props {
-  recipe: RecipeType;
-  updateRecipe: Function;
-}
-
-export interface State extends RecipeType {
-  showImageModal: boolean;
-  showIngredientsModal: boolean;
-}
-
-const Hero = styled.div`
-  background: ${COLOR.PRIMARY};
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  flex: 1 0 auto;
-  padding-bottom: 25px;
-  padding-top: 5px;
-`;
-
-const Image = styled.img`
-  object-fit: cover;
-  width: 80vw;
-  height: 80vw;
-  max-height: 250px;
-  max-width: 250px;
-  border-radius: 50%;
-  position: relative;
-  border: 5px solid ${COLOR.WHITE};
-  box-shadow: ${boxShadow};
-`;
-
-const Body = styled.div`
-  flex: 1 1 auto;
-  padding: 25px;
-  background: ${COLOR.WHITE};
-`;
-
-const TextInputWithMargin = TextInput.extend`
-  margin-bottom: 25px;
-`;
-
-const TextAreaWithMargin = TextArea.extend`
-  margin-bottom: 25px;
-`;
-
 class RecipeEdit extends React.PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -193,5 +145,53 @@ class RecipeEdit extends React.PureComponent<Props, State> {
     );
   }
 }
+
+interface RouterParams { }
+
+export interface Props {
+  recipe: RecipeType;
+  updateRecipe: Function;
+}
+
+export interface State extends RecipeType {
+  showImageModal: boolean;
+  showIngredientsModal: boolean;
+}
+
+const Hero = styled.div`
+  background: ${COLOR.PRIMARY};
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex: 1 0 auto;
+  padding-bottom: 25px;
+  padding-top: 5px;
+`;
+
+const Image = styled.img`
+  object-fit: cover;
+  width: 80vw;
+  height: 80vw;
+  max-height: 250px;
+  max-width: 250px;
+  border-radius: 50%;
+  position: relative;
+  border: 5px solid ${COLOR.WHITE};
+  box-shadow: ${boxShadow};
+`;
+
+const Body = styled.div`
+  flex: 1 1 auto;
+  padding: 25px;
+  background: ${COLOR.WHITE};
+`;
+
+const TextInputWithMargin = TextInput.extend`
+  margin-bottom: 25px;
+`;
+
+const TextAreaWithMargin = TextArea.extend`
+  margin-bottom: 25px;
+`;
 
 export default RecipeEdit;

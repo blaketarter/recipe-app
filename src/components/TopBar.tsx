@@ -6,62 +6,6 @@ import withProps from '../utils/withProps';
 import BackButton from './BackButton';
 import { boxShadowSmall, boxShadowSmallTransparent } from '../utils/metrics';
 
-export interface Props {
-  title?: string;
-  shadowOnScroll?: boolean;
-  backButton?: boolean;
-  children?: React.ReactChild;
-  leftAction?: React.ReactChild;
-  rightAction?: React.ReactChild;
-}
-
-interface WrapperProps {
-  showShadow?: boolean;
-}
-
-const Wrapper = withProps<WrapperProps>()(styled.div)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 auto;
-  background: ${COLOR.PRIMARY};
-  padding: 0;
-  width: 100%;
-  height: 50px;
-  position: relative;
-  
-  ${props => props.showShadow ? `box-shadow: ${boxShadowSmall}` : `box-shadow: ${boxShadowSmallTransparent}`};
-  transition: box-shadow 0.2s ease;
-`;
-
-const Title = styled.h2`
-  text-align: center;
-  flex: 1 0 auto;
-  font-size: 20px;
-`;
-
-const LeftActionWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 10px;
-  display: flex;
-  align-items: center;
-`;
-
-const RightActionWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 10px;
-  display: flex;
-  align-items: center;
-`;
-
-interface State {
-  showShadow: boolean;
-}
-
 class TopBar extends React.PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -133,5 +77,61 @@ class TopBar extends React.PureComponent<Props, State> {
     );
   }
 }
+
+export interface Props {
+  title?: string;
+  shadowOnScroll?: boolean;
+  backButton?: boolean;
+  children?: React.ReactChild;
+  leftAction?: React.ReactChild;
+  rightAction?: React.ReactChild;
+}
+
+interface State {
+  showShadow: boolean;
+}
+
+interface WrapperProps {
+  showShadow?: boolean;
+}
+
+const Wrapper = withProps<WrapperProps>()(styled.div)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  background: ${COLOR.PRIMARY};
+  padding: 0;
+  width: 100%;
+  height: 50px;
+  position: relative;
+  
+  ${props => props.showShadow ? `box-shadow: ${boxShadowSmall}` : `box-shadow: ${boxShadowSmallTransparent}`};
+  transition: box-shadow 0.2s ease;
+`;
+
+const Title = styled.h2`
+  text-align: center;
+  flex: 1 0 auto;
+  font-size: 20px;
+`;
+
+const LeftActionWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 10px;
+  display: flex;
+  align-items: center;
+`;
+
+const RightActionWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 10px;
+  display: flex;
+  align-items: center;
+`;
 
 export default TopBar;

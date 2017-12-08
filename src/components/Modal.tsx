@@ -6,6 +6,57 @@ import withProps from '../utils/withProps';
 import { boxShadow } from '../utils/metrics';
 import Button from './Button';
 
+class Modal extends React.PureComponent<Props, State> {
+  static defaultProps = {
+    showComplete: true,
+    showCancel: false,
+    cancelText: 'Cancel',
+    completeText: 'Complete',
+  };
+
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+    };
+  }
+
+  private onCompleteHandler = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (this.props.onComplete) {
+      this.props.onComplete(e);
+    }
+  }
+
+  private onCancelHandler = (e: MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
+    if (this.props.onCancel) {
+      this.props.onCancel(e);
+    }
+  }
+
+  render() {
+    return (
+      <Wrapper>
+        <ModalBackDrop onClick={this.onCancelHandler} />
+        <ModalWrapper>
+          <Title>{this.props.title}</Title>
+          <Body>{this.props.children}</Body>
+          <ActionWrapper>
+            {this.props.showCancel &&
+              <CancelButton onClick={this.onCancelHandler}>{this.props.cancelText}</CancelButton>}
+            {this.props.showComplete &&
+              <CompleteButton fullMargin={!this.props.showCancel} onClick={this.onCompleteHandler}>
+                {this.props.completeText}
+              </CompleteButton>}
+          </ActionWrapper>
+        </ModalWrapper>
+      </Wrapper>
+    );
+  }
+}
+
 export interface Props {
   title: string;
   onComplete?: Function;
@@ -16,8 +67,9 @@ export interface Props {
   cancelText?: string;
 }
 
-interface WrapperProps {
-}
+interface State {}
+
+interface WrapperProps {}
 
 interface CompleteProps {
   fullMargin: boolean;
@@ -82,59 +134,5 @@ const CompleteButton = withProps<CompleteProps>()(Button.extend)`
 const ActionWrapper = styled.div`
   display: flex;
 `;
-
-interface State {
-}
-
-class Modal extends React.PureComponent<Props, State> {
-  static defaultProps = {
-    showComplete: true,
-    showCancel: false,
-    cancelText: 'Cancel',
-    completeText: 'Complete',
-  };
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-    };
-  }
-
-  private onCompleteHandler = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (this.props.onComplete) {
-      this.props.onComplete(e);
-    }
-  }
-
-  private onCancelHandler = (e: MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
-    if (this.props.onCancel) {
-      this.props.onCancel(e);
-    }
-  }
-
-  render() {
-    return (
-      <Wrapper>
-        <ModalBackDrop onClick={this.onCancelHandler} />
-        <ModalWrapper>
-          <Title>{this.props.title}</Title>
-          <Body>{this.props.children}</Body>
-          <ActionWrapper>
-            {this.props.showCancel &&
-              <CancelButton onClick={this.onCancelHandler}>{this.props.cancelText}</CancelButton>}
-            {this.props.showComplete &&
-              <CompleteButton fullMargin={!this.props.showCancel} onClick={this.onCompleteHandler}>
-                {this.props.completeText}
-              </CompleteButton>}
-          </ActionWrapper>
-        </ModalWrapper>
-      </Wrapper>
-    );
-  }
-}
 
 export default Modal;

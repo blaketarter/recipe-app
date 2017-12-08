@@ -11,8 +11,6 @@ import Label from './Label';
 import Modal from './Modal';
 import COLOR from '../utils/colors';
 
-interface RouterParams {}
-
 class CreateStep2 extends React.PureComponent<Props, State> {
   context: RouterChildContext<RouterParams>;
   
@@ -112,7 +110,6 @@ class CreateStep2 extends React.PureComponent<Props, State> {
   }
 }
 
-
 interface Props {
   addRecipe: Function;
   clearNewRecipe: Function;
@@ -127,6 +124,8 @@ interface State {
   ingredients: string[];
   showModal: boolean;
 }
+
+interface RouterParams {}
 
 const Body = styled.div`
   flex: 1 0 auto;

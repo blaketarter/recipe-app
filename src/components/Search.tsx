@@ -1,9 +1,6 @@
 import * as React from 'react';
 import PageWrapper from './PageWrapper';
 
-export interface Props {
-}
-
 function Search({}: Props) {
   return (
     <PageWrapper>
@@ -11,5 +8,7 @@ function Search({}: Props) {
     </PageWrapper>
   );
 }
+
+export interface Props {}
 
 export default Search;
