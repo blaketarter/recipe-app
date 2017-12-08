@@ -13,8 +13,9 @@ import EditButton from './EditButton';
 import ScrollWrapper from './ScrollWrapper';
 import TopBar from './TopBar';
 import Label from './Label';
-import { boxShadow } from '../utils/metrics';
 import Modal from './Modal';
+import Hero from './HeroColor';
+import RecipeImage from './RecipeImage';
 
 class Recipe extends React.PureComponent<Props, State> {
   constructor(props: Props) {
@@ -64,7 +65,7 @@ class Recipe extends React.PureComponent<Props, State> {
           rightAction={<EditButton recipeId={id} />} />
         <ScrollWrapper>
           <Hero>
-            <Image src={image} />
+            <RecipeImage src={image} />
             { this.renderDeleteIcon() }
           </Hero>
           <Body>
@@ -98,29 +99,6 @@ interface State {
 }
 
 interface RouterParams {}
-
-const Hero = styled.div`
-  background: ${COLOR.PRIMARY};
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  flex: 1 0 auto;
-  padding-bottom: 25px;
-  padding-top: 5px;
-  position: relative;  
-`;
-
-const Image = styled.img`
-  object-fit: cover;
-  width: 80vw;
-  height: 80vw;
-  max-height: 250px;
-  max-width: 250px;
-  border-radius: 50%;
-  position: relative;
-  border: 5px solid ${COLOR.WHITE};
-  box-shadow: ${boxShadow};
-`;
 
 const Body = styled.div`
   flex: 1 1 auto;

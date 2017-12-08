@@ -14,7 +14,8 @@ import TextArea from './TextArea';
 import TextInput from './TextInput';
 import AcceptButton from './AcceptButton'
 import Modal from './Modal';
-import { boxShadow } from '../utils/metrics';
+import Hero from './HeroColor';
+import RecipeImage from './RecipeImage';
 
 class RecipeEdit extends React.PureComponent<Props, State> {
   constructor(props: Props) {
@@ -110,7 +111,7 @@ class RecipeEdit extends React.PureComponent<Props, State> {
           rightAction={<AcceptButton onClick={this.handleOnClick} />}/>
         <ScrollWrapper>
           <Hero>
-            <Image src={image} onClick={this.handleAddImage} />
+            <RecipeImage src={image} onClick={this.handleAddImage} />
           </Hero>
           <Body>
             <Label>Name</Label>
@@ -157,28 +158,6 @@ export interface State extends RecipeType {
   showImageModal: boolean;
   showIngredientsModal: boolean;
 }
-
-const Hero = styled.div`
-  background: ${COLOR.PRIMARY};
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  flex: 1 0 auto;
-  padding-bottom: 25px;
-  padding-top: 5px;
-`;
-
-const Image = styled.img`
-  object-fit: cover;
-  width: 80vw;
-  height: 80vw;
-  max-height: 250px;
-  max-width: 250px;
-  border-radius: 50%;
-  position: relative;
-  border: 5px solid ${COLOR.WHITE};
-  box-shadow: ${boxShadow};
-`;
 
 const Body = styled.div`
   flex: 1 1 auto;

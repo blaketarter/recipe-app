@@ -11,6 +11,8 @@ import TextInput from './TextInput';
 import MdAdd from 'react-icons/lib/md/add';
 import COLOR from '../utils/colors';
 import { boxShadow } from '../utils/metrics';
+import Hero from './HeroColor';
+import RecipeImage from './RecipeImage';
 
 class CreateStep1 extends React.PureComponent<Props, State> {
   context: RouterChildContext<RouterParams>;
@@ -115,16 +117,6 @@ interface State {
 
 interface RouterParams {}
 
-const Hero = styled.div`
-  background: ${COLOR.PRIMARY};
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  flex: 0 0 auto;
-  padding-top: 5px;
-  padding-bottom: 25px;
-`;
-
 const Body = styled.div`
   flex: 1 0 auto;
   padding: 25px;
@@ -147,18 +139,6 @@ const NoImageTile = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: ${boxShadow};
-`;
-
-const RecipeImage = styled.img`
-  object-fit: cover;
-  width: 80vw;
-  height: 80vw;
-  max-height: 250px;
-  max-width: 250px;
-  border-radius: 50%;
-  position: relative;
-  border: 5px solid ${COLOR.WHITE};
   box-shadow: ${boxShadow};
 `;
 

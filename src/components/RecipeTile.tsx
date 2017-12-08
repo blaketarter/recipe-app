@@ -17,9 +17,7 @@ const RecipeTile: SFC<Recipe> = ({
   return (
     <Wrapper onClick={() => context.router.history.push(`/recipe/${id}`)}>
       <TopBar>
-        <Polygon>
-          <Image url={image} />
-        </Polygon>
+        <Image url={image} />
         <Title>{name}</Title>
       </TopBar>
       <BottomBar>
@@ -56,12 +54,6 @@ const Wrapper = styled.li`
   box-shadow: ${boxShadowSmall};
   background: ${COLOR.WHITE};
   border-radius: 2px;
-`;
-
-const Polygon = styled.div`
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
 `;
 
 const Title = styled.p`
